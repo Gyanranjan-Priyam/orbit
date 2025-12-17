@@ -1,50 +1,110 @@
-# Welcome to your Expo app 👋
+# Orbit 🚀
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Orbit is a modern project management app built with Expo, focused on clean design, smooth interactions, and a simple workflow. It combines an iOS-style liquid glass UI with secure authentication and a scalable backend.
 
-## Get started
+---
 
-1. Install dependencies
+## Tech Stack
 
-   ```bash
-   npm install
-   ```
+* **Expo** for cross-platform development
+* **Clerk** for authentication (Google & Apple OAuth)
+* **Supabase** for database and user data storage
+* **Zustand** for lightweight state management
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## Features
 
-In the output, you'll find options to open the app in a
+* 🎨 iOS-inspired glassmorphism UI with liquid glass tab bar
+* 🔐 Authentication with Clerk (Google & Apple OAuth)
+* 💾 User data storage and syncing with Supabase
+* 📱 Platform-specific login screens using `.ios.tsx`
+* 🌈 Modern gradients, blur effects, and smooth animations
+* 📊 Simple and predictable state management with Zustand
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Getting Started
 
-## Get a fresh project
-
-When you're ready, run:
+### 1. Install dependencies
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Configure environment variables
 
-## Learn more
+Create a `.env` file in the root directory:
 
-To learn more about developing your project with Expo, look at the following resources:
+```env
+EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
+EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Make sure your Clerk keys are configured in your Expo project settings as required.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+### 3. Set up Supabase
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Run the SQL schema provided in:
+
+```
+docs/AUTH_SETUP.md
+```
+
+Use the Supabase SQL Editor to apply the schema.
+
+---
+
+### 4. Start the app
+
+```bash
+npx expo start
+```
+
+Scan the QR code with Expo Go or run the app on an iOS simulator.
+
+---
+
+## Authentication Flow
+
+* Users sign in using Google or Apple via Clerk
+* After successful authentication, user data is synced to Supabase
+* Unauthenticated users are redirected to the login screen
+* iOS devices use a native glassmorphism login UI
+* Authenticated users access the main tab-based app
+* User profile information is available in the Profile tab
+
+---
+
+## Project Structure
+
+```
+app/
+  (auth)/              # Authentication screens
+    login.tsx          # Default login screen
+    login.ios.tsx      # iOS-specific glassmorphism login
+  (tabs)/              # Main application tabs
+    index.tsx          # Home screen with glass cards
+    explore.tsx        # Explore screen
+    profile.tsx        # User profile screen
+lib/
+  supabase.ts          # Supabase client and user sync logic
+components/
+  tab-bar/             # Platform-specific tab bar backgrounds
+```
+
+---
+
+## Notes
+
+* This project is optimized for iOS design first
+* Android uses shared UI components where possible
+* Expo EAS is recommended for building and deploying iOS apps
+
+---
+
+## License
+
+MIT License
